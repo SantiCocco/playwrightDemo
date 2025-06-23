@@ -13,17 +13,6 @@ const pagePaths = {
   termsConditions: "terms-conditions",
 };
 
-// used by tesults-lighthouse.js to upload results
-type tesultsTestCase = {
-  name: string;
-  suite: string;
-  result: "pass" | "fail";
-  rawResult: string;
-  _Path: string;
-  files: Array<string>;
-};
-
-const tesultsCases: Array<tesultsTestCase> = [];
 let browser: BrowserContext;
 let port: number;
 
@@ -74,43 +63,7 @@ for (const [pageName, pagePath] of Object.entries(pagePaths)) {
       config
     );
 
-    // write file for upload to tesults
     const reportHtml = runnerResult.report;
     fs.writeFileSync(reportPath, reportHtml);
-
-    const scores = {
-      Performance: Math.round(
-        runnerResult.lhr.categories.performance.score! * 100
-      ),
-      Accessibility: Math.round(
-        runnerResult.lhr.categories.accessibility.score! * 100
-      ),
-      "Best Practices": Math.round(
-        runnerResult.lhr.categories["best-practices"].score! * 100
-      ),
-      SEO: Math.round(runnerResult.lhr.categories.seo.score! * 100),
-      PWA: Math.round(runnerResult.lhr.categories.pwa.score! * 100),
-    };
-
-    for (const [score, value] of Object.entries(scores)) {
-      console.log(`${score}: ${value}`);
-      tesultsCases.push({
-        name: `${score}`,
-        suite: `${pageName}`,
-        result: "pass",
-        rawResult: `${value}`,
-        _Path: `${baseURL + pagePath}`,
-        files: [reportPath],
-      });
-    }
   });
 }
-
-test.afterAll(async () => {
-  await browser.close();
-  // write file for upload to tesults
-  fs.writeFileSync(
-    `${__dirname}/reports/cases.json`,
-    JSON.stringify(tesultsCases)
-  );
-});

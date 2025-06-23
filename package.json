@@ -9,7 +9,7 @@
     "test:chromium": "playwright test --project=chromium",
     "test:ci": "CI=true playwright test",
     "test:debug": "playwright test --debug --project=chromium",
-    "test:lighthouse": "CI=true playwright test --config=./tests/lighthouse/playwright.config.ts && node ./.scripts/tesults-lighthouse.js"
+    "test:lighthouse": "CI=true playwright test --config=./tests/lighthouse/playwright.config.ts"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,7 @@
     "@types/node": "^22.0.0",
     "prettier": "^3.0.0",
     "node-fetch": "2",
-    "playwright-tesults-reporter": "^1.1.0",
     "lighthouse": "^11.3.0",
-    "find-free-ports": "^3.0.0",
-    "tesults": "^1.1.3"
+    "find-free-ports": "^3.0.0"
   }
 }

@@ -1,16 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-// buildName is used for Tesults build name
-// the environment variables come from Github Actions
-// https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
-const buildName = `${process.env.GITHUB_SHA?.slice(0, 7)}-${
-  process.env.GITHUB_RUN_NUMBER
-}-${process.env.GITHUB_RUN_ATTEMPT}`;
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
+//Read environment variables from file.
 // require('dotenv').config();
 
 /**
@@ -28,21 +18,9 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI
-    ? [
-        ["line"],
-        ["html", { open: "never" }],
-        ["junit", { outputFile: "junit.xml" }],
-        ["blob", { outputDir: "blob-report" }],
-        [
-          "playwright-tesults-reporter",
-          {
-            "tesults-target": process.env.PW_TESULTS_TOKEN,
-            "tesults-build-name": buildName,
-          },
-        ],
-      ]
-    : [["html", { open: "never" }]],
+   reporter: process.env.CI
+    ? [['line']]                         
+    : [['html', { open: 'never' }]],    
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
