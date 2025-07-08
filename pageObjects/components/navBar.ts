@@ -1,6 +1,6 @@
 import { BasePageComponent } from "../base.pageComponent";
-
 export default class NavBar extends BasePageComponent {
+
   readonly links = {
     home: this.host.getByRole("link", { name: "Acme Store" }),
     all: this.host.getByRole("link", { name: "All" }),

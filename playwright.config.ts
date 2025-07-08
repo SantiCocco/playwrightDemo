@@ -7,7 +7,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 60_000,
+  timeout: 20_000,
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -25,7 +25,9 @@ export default defineConfig({
         ["junit", { outputFile: "junit.xml" }],
         ["blob", { outputDir: "blob-report" }],
       ]
-    : [["html", { open: "never" }]], 
+    : [ ["list"],
+        ["html", { open: "never" }]
+      ], 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
