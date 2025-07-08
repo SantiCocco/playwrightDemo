@@ -13,11 +13,10 @@ test.describe("Add specific product to cart", () => {
 
       await expect(productCard).toBeVisible();
       await productCard.click();
-      await page.waitForTimeout(3000);
-      await expect(productPage.page).toHaveURL(`/product/acme-geometric-circles-t-shirt`);
     });
 
     await test.step("Select color and size, then add to cart", async () => {
+      await expect(productPage.page).toHaveURL(`/product/acme-geometric-circles-t-shirt`);
       await productPage.prepareAndAddToCart({
         color: "Black",
         size: "L",

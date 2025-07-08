@@ -6,7 +6,7 @@
   "scripts": {
     "format": "prettier --write .",
     "test": "playwright test",
-    "test:chromium": "playwright test --project=chromium --headed -g \"Add specific product to cart\"",
+    "test:chromium": "playwright test --project=chromium --headed -g \"product search\"",
     "test:ci": "CI=true playwright test",
     "test:debug": "playwright test --debug --project=chromium",
     "test:lighthouse": "CI=true playwright test --config=./tests/lighthouse/playwright.config.ts"

@@ -1,11 +1,9 @@
 // pageObjects/pages/product.page.ts
 import { BasePage } from "../base.page";
-import NavBar from "../components/navBar";
 import CartSidebar from "../components/cartSideBar";
 import { expect, Locator } from "@playwright/test";
 
 export default class ProductPage extends BasePage {
-  readonly navBar = new NavBar(this.page);
   readonly cartSidebar = new CartSidebar(this.page);
 
   readonly title = this.page.locator("h1");
